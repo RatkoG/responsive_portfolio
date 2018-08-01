@@ -1,8 +1,12 @@
-$bg-color: pink;
-body {
-    background: $bg-color;
+$primary-color: #444;
+* {
+    box-sizing: border-box;
 }
 
-h1 {
-    color: blue;
+body {
+    background: $primary-color;
+    color: #fff;
+    height: 100%;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
