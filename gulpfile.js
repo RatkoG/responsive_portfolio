@@ -1,5 +1,4 @@
 const gulp = require('gulp');
-const uglify = require('gulp-uglify');
 const sass = require('gulp-sass');
 const browserSync = require('browser-sync').create();
 
@@ -15,18 +14,21 @@ gulp.task('copyHTML', function () {
         .pipe(gulp.dest('build'));
 })
 
-gulp.task('minify', function () {
+gulp.task('scripts', function () {
     gulp.src('src/js/*.js')
-        .pipe(uglify())
         .pipe(gulp.dest('build/js'));
 })
+gulp.task('js-watch', ['js'], function (done) {
+    browserSync.reload();
+    done();
+});
 // Watch & Serve
-gulp.task('serve', ['sass', 'minify'], function () {
+gulp.task('serve', ['sass', 'scripts'], function () {
     browserSync.init({
         server: './build'
     })
     gulp.watch('src/scss/*.scss', ['sass']);
-    gulp.watch('src/js/*.js', ['minify']);
+    gulp.watch('src/js/*.js', ['scripts']);
     gulp.watch('src/*.html', ['copyHTML']).on('change', browserSync.reload);
 })
 gulp.task('default', ['serve']);
